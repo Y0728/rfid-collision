@@ -1,15 +1,28 @@
 
-
+/*  */
 public class BSATag{
     char[] id;
 
     public BSATag(int size, long idNumber){
-        createId(idNumber);
+        createId(size,idNumber);
+        System.out.println(id);
     }
 
-    public void createId(long idNumber){
-        String s = Long.toBinaryString(idNumber);
-        id = s.toCharArray();
-        System.out.println(s);
+    /* Sets up the id */
+    public void createId(int size ,long idNumber){
+
+        /* We need to add 0s to the start of id if the idNumber doesn't
+         * fill the id array */
+        id = new char[size];
+        StringBuilder s = new StringBuilder(Long.toBinaryString(idNumber));
+        int count = 0;
+        for(int i = 0; i < id.length; i++){
+            if(i >= size - s.length()){
+                id[i] = s.charAt(count);
+                count++;
+            }else{
+                id[i] = '0';
+            }
+        }
     }
 }
