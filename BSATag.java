@@ -1,7 +1,7 @@
 
 /*  */
 public class BSATag{
-    boolean active;
+    boolean active = true;
     char[] id;
 
     public BSATag(int size, long idNumber){
@@ -28,7 +28,7 @@ public class BSATag{
     }
 
     /* Returns with whole id if the id is equal or less than id
-     * returns null if not 
+     * returns null if not
      * If tag is inactive it won't respond*/
     public char[] respondBSAQuery(char[] query){
         if(query.length != id.length){

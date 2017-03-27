@@ -2,13 +2,14 @@ import java.util.*;
 
 /* The environment which creates the tags and readers and tests them */
 public class BenchEnvironment{
-    int numberOfTags = 15;
-    int numberOfBitsInId = 4;
+    int numberOfTags = 30;
+    int numberOfBitsInId = 6;
     int sizeOfId;
     Random randomGenerator = new Random();
 
     TreeSet<Integer> generatedUniqueIds;
     BSATag[] tags;
+    BSAReader bsareader;
 
     public static void main(String[] args){
         new BenchEnvironment();
@@ -23,11 +24,12 @@ public class BenchEnvironment{
 
         generateID();
         generateBSATags();
+        bsareader = new BSAReader(tags);
 
 
         //DEBUG
         for(int i = 0; i < tags.length; i++){
-            char[] s = tags[i].respondBSAQuery("0011".toCharArray());
+            char[] s = tags[i].respondBSAQuery("110000".toCharArray());
             if(s != null){
                 System.out.println(s);
             }
