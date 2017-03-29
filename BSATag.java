@@ -10,8 +10,7 @@ public class BSATag{
 
     /* Sets up the id from a given long
      * Will prepend 0s if the number of bits doesn't match*/
-    public void createId(int size ,long idNumber){
-
+    public void createId(int size, long idNumber){
         /* We need to add 0s to the start of id if the idNumber doesn't
          * fill the id array */
         id = new char[size];

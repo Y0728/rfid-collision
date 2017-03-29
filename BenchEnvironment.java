@@ -24,7 +24,7 @@ public class BenchEnvironment{
 
         generateID();
         generateBSATags();
-        bsareader = new BSAReader(tags);
+        bsareader = new BSAReader(tags, numberOfBitsInId);
 
 
         //DEBUG
