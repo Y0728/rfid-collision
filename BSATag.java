@@ -1,7 +1,7 @@
 
 /*  */
 public class BSATag{
-    boolean active = true;
+    private boolean active = true;
     char[] id;
 
     public BSATag(int size, long idNumber){
@@ -30,6 +30,9 @@ public class BSATag{
      * returns null if not
      * If tag is inactive it won't respond*/
     public char[] respondBSAQuery(char[] query){
+        if(!active){
+            return null;
+        }
         if(query.length != id.length){
             System.err.println("Size of BSAtag: " + id + " does not match " + query);
             return null;
@@ -58,5 +61,13 @@ public class BSATag{
             s += id[i];
         }
         return s;
+    }
+
+    public void activate(){
+        active = true;
+    }
+
+    public void deactivate(){
+        active = false;
     }
 }
