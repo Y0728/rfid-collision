@@ -1,3 +1,3 @@
 public interface Reader{
-    void sendQuery(char[] query);
+    int sendQuery(char[] query);
 }

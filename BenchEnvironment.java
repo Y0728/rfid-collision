@@ -2,8 +2,8 @@ import java.util.*;
 
 /* The environment which creates the tags and readers and tests them */
 public class BenchEnvironment{
-    int numberOfTags = 30;
-    int numberOfBitsInId = 6;
+    int numberOfTags = 10000;
+    int numberOfBitsInId = 32; // CONDITION: 2^numberOfBitsInId > numberoftags
     int sizeOfId;
     Random randomGenerator = new Random();
 
@@ -16,6 +16,7 @@ public class BenchEnvironment{
     }
 
     public BenchEnvironment(){
+
         generatedUniqueIds = new TreeSet<Integer>();
         tags = new BSATag[numberOfTags];
 
@@ -25,6 +26,8 @@ public class BenchEnvironment{
         generateID();
         generateBSATags();
         bsareader = new BSAReader(tags, numberOfBitsInId);
+        bsareader.identifyTags();
+
 
 
         //DEBUG
@@ -34,6 +37,20 @@ public class BenchEnvironment{
                 System.out.println(s);
             }
         }
+
+
+
+        /*
+        numberOfTags = 4;
+        tags = new BSATag[numberOfTags];
+        numberOfBitsInId = 4;
+        tags[0] = new BSATag(numberOfBitsInId,0b0111);
+        tags[1] = new BSATag(numberOfBitsInId,0b1011);
+        tags[2] = new BSATag(numberOfBitsInId,0b1110);
+        tags[3] = new BSATag(numberOfBitsInId,0b0110);
+        bsareader = new BSAReader(tags, numberOfBitsInId);
+        bsareader.identifyTags();
+        */
 
     }
 

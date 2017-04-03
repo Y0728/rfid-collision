@@ -7,9 +7,10 @@ public class BSAReader implements Reader{
 
     TreeSet<Integer> currentCollisionBits;     //All bitindexes that differ from query
     TreeSet<Integer> currentNonCollisionBits;  //Used to check if more bits collide
-    
-    char[] responseToCompare;   
+
+    char[] responseToCompare;
     int tagsFound = 0;
+    BSATag lastRespondingTag;
 
     public BSAReader(BSATag[] tags, int numberOfBitsInId){
         this.tags = tags;
@@ -18,22 +19,25 @@ public class BSAReader implements Reader{
     }
 
     /* Uses algorithm to identify all tags */
-    private void identifyTags(){
-        char[] query = new char[numberOfBitsInId];
-        Arrays.fill(query,'1');
+    public void identifyTags(){
+        char[] query = new char[idLength];
+        resetCollisionBits();
         while(tagsFound != tags.length){    //While tags still responding
-            while(sendQuery(query) > 1){    
+            Arrays.fill(query,'1');
+            while(sendQuery(query) > 1){
                 query = findNewQuery(query);
+                resetCollisionBits();
             }
+            System.out.println("Tag identified: " + tagsFound + ": " + lastRespondingTag.toString());
+            lastRespondingTag.deactivate();
             tagsFound++;
         }
-
     }
 
     /* Uses a previous query and biggest collision bit to find new query */
     /* Fills the next query with the same bits as previous query up until
     * the first collision bit which will be set to 0 and the rest to 1*/
-    private char[] findNewQuery(query){
+    private char[] findNewQuery(char[] query){
         int firstCollisionBit = currentCollisionBits.first();
         for(int i = 0; i < firstCollisionBit; i++){
             query[i] = responseToCompare[i];
@@ -56,14 +60,18 @@ public class BSAReader implements Reader{
 
     /* Sends the query to the cloud of tags */
     public int sendQuery(char[] query){
+        boolean firstResponse = true;
         int numberOfReturns = 0;
         char[] response;
         for(int i = 0; i < tags.length; i++){
             response = tags[i].respondBSAQuery(query);
             if(response != null){
-                if(i == 0){
+                ///System.out.println("RESPONSE: " + tags[i]);
+                lastRespondingTag = tags[i];
+                if(firstResponse){     //First response used to compare
                     responseToCompare = response;
-                }else{
+                    firstResponse = false;
+                }else{          //The rest used to ACTIVE TAGSfind collision
                     checkCollisionBits(response);
                 }
                 numberOfReturns++;
@@ -79,13 +87,24 @@ public class BSAReader implements Reader{
     differs from the response we compare with.
     */
     private void checkCollisionBits(char[] response){
-        Iterator it = currentNonCollisionBits.iterator();
+        Iterator<Integer> it = currentNonCollisionBits.iterator();
         while(it.hasNext()){
-            Integer i = (Integer) it.next();
-            if(responseToCompare[i] != response[i]){        
+            int i = it.next();
+            if(responseToCompare[i] != response[i]){
                 currentCollisionBits.add(i);    //Bit collision
-                currentNonCollisionBits.remove(i);
+                it.remove();
             }
         }
+    }
+
+    private void printActiveTags(){
+        System.out.println("_______ACTIVE TAGS___________");
+        for(int i = 0; i < tags.length; i++){
+            if(tags[i].isActive()){
+                System.out.println(tags[i]);
+            }
+        }
+        System.out.println("______________________________");
+
     }
 }

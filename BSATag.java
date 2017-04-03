@@ -56,11 +56,7 @@ public class BSATag{
 
     @Override
     public String toString(){
-        String s = "";
-        for(int i = 0; i < id.length; i++){
-            s += id[i];
-        }
-        return s;
+        return String.valueOf(id);
     }
 
     public void activate(){
@@ -69,5 +65,9 @@ public class BSATag{
 
     public void deactivate(){
         active = false;
+    }
+
+    public boolean isActive(){
+        return active;
     }
 }
