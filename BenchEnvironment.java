@@ -2,7 +2,7 @@ import java.util.*;
 
 /* The environment which creates the tags and readers and tests them */
 public class BenchEnvironment{
-    int numberOfTags = 10000;
+    int numberOfTags = 20000;
     int numberOfBitsInId = 32; // CONDITION: 2^numberOfBitsInId > numberoftags
     int sizeOfId;
     Random randomGenerator = new Random();
@@ -29,14 +29,14 @@ public class BenchEnvironment{
         bsareader.identifyTags();
 
 
-
+        /*
         //DEBUG
         for(int i = 0; i < tags.length; i++){
             char[] s = tags[i].respondBSAQuery("110000".toCharArray());
             if(s != null){
                 System.out.println(s);
             }
-        }
+        }*/
 
 
 

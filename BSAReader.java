@@ -38,13 +38,18 @@ public class BSAReader implements Reader{
     /* Fills the next query with the same bits as previous query up until
     * the first collision bit which will be set to 0 and the rest to 1*/
     private char[] findNewQuery(char[] query){
-        int firstCollisionBit = currentCollisionBits.first();
-        for(int i = 0; i < firstCollisionBit; i++){
+        for(int i: currentNonCollisionBits){
             query[i] = responseToCompare[i];
         }
-        query[firstCollisionBit] = '0';
-        for(int i = firstCollisionBit+1; i < idLength; i++){
-            query[i] = '1';
+
+        boolean first = true;
+        for(int i: currentCollisionBits){
+            if(first){
+                query[i] = '0';
+                first = false;
+            }else{
+                query[i] = '1';
+            }
         }
         return query;
     }
@@ -66,7 +71,7 @@ public class BSAReader implements Reader{
         for(int i = 0; i < tags.length; i++){
             response = tags[i].respondBSAQuery(query);
             if(response != null){
-                ///System.out.println("RESPONSE: " + tags[i]);
+                //System.out.println("RESPONSE: " + tags[i]);
                 lastRespondingTag = tags[i];
                 if(firstResponse){     //First response used to compare
                     responseToCompare = response;
@@ -77,6 +82,8 @@ public class BSAReader implements Reader{
                 numberOfReturns++;
             }
         }
+        //System.out.println("COLLBITS: " + currentCollisionBits);
+        //System.out.println("QUERY: " + String.valueOf(query));
         return numberOfReturns;
     }
 
