@@ -94,7 +94,7 @@ public class BSAReader implements Reader{
 
     /* Sends the query to the cloud of tags */
     public int sendQuery(char[] query){
-        currentNumberOfBits += query.length;
+        currentNumberOfBits += query.length*tags.length;
         currentNumberOfQueries++;      //One query has succesfully been sent
 
         boolean firstResponse = true;
