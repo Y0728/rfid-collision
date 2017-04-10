@@ -65,7 +65,8 @@ public class BSAReader implements Reader{
 
     /* Uses a previous query and biggest collision bit to find new query */
     /* Fills the next query with the same bits as previous query up until
-    * the first collision bit which will be set to 0 and the rest to 1*/
+    * the first collision bit which will be set to 0 and the rest of the collision
+    * bits to 1 while the non collision bit stays the same as the responses*/
     private char[] findNewQuery(char[] query){
         for(int i: currentNonCollisionBits){
             query[i] = responseToCompare[i];
@@ -94,8 +95,9 @@ public class BSAReader implements Reader{
 
     /* Sends the query to the cloud of tags */
     public int sendQuery(char[] query){
-        currentNumberOfBits += query.length*tags.length;
+        currentNumberOfBits += query.length;
         currentNumberOfQueries++;      //One query has succesfully been sent
+        //System.out.println("Q " + currentNumberOfQueries + ": \t" + String.valueOf(query));
 
         boolean firstResponse = true;
         int numberOfReturns = 0;
@@ -103,6 +105,7 @@ public class BSAReader implements Reader{
         for(int i = 0; i < tags.length; i++){
             response = tags[i].respondBSAQuery(query);
             if(response != null){       //null if no response
+                //System.out.println(">\t" + String.valueOf(response));
                 //System.out.println("RESPONSE: " + tags[i]);
                 lastRespondingTag = tags[i];
                 if(firstResponse){       //First response used to compare

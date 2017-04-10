@@ -1,5 +1,5 @@
 
-/*  */
+/* A tag that responds to queries from the reader */
 public class BSATag{
     private boolean active = true;
     char[] id;
