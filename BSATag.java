@@ -26,6 +26,30 @@ public class BSATag{
         }
     }
 
+    /* Responds a dynamic bsa call which is only the part of the id 
+    * which is the part of the id that complements the query if the
+    * query would make up the top bits in the id.
+    * Example: query(101) id([101]001) -> reponse(001)*/
+    public char[] respondDBSAQuery(char[] dynQuery){
+        if(dynQuery.length != id.length){
+            char[] bsaQuery = new char[id.length];
+            for(int i = 0; i < bsaQuery.length; i++){
+                bsaQuery[i] = i < dynQuery.length ? dynQuery[i] : '1';
+            }
+            char[] bsaResponse = respondBSAQuery(bsaQuery);
+            if(bsaResponse == null){
+                return null;
+            }
+            char[] dynResponse = new char[id.length - dynQuery.length];
+            for(int i = 0; i < dynResponse.length; i++){
+                dynResponse[i] = bsaResponse[dynQuery.length + i];
+            }
+            return dynResponse;
+        }else{
+            return respondBSAQuery(dynQuery);
+        }
+    }
+
     /* Returns with whole id if the id is equal or less than id
      * returns null if not
      * If tag is inactive it won't respond*/
@@ -34,7 +58,7 @@ public class BSATag{
             return null;
         }
         if(query.length != id.length){
-            System.err.println("Size of BSAtag: " + id + " does not match " + query);
+            System.err.println("Size of BSAtag: " + id.length + " does not match " + query.length);
             return null;
         }
         int size = id.length;

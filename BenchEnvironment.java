@@ -10,6 +10,7 @@ public class BenchEnvironment{
     TreeSet<Integer> generatedUniqueIds;
     BSATag[] tags;
     BSAReader bsareader;
+    DBSAReader dbsareader;
 
     public static void main(String[] args){
         new BenchEnvironment();
@@ -17,22 +18,22 @@ public class BenchEnvironment{
 
     public BenchEnvironment(){
 
-//        generatedUniqueIds = new TreeSet<Integer>();
-//        tags = new BSATag[numberOfTags];
-//
-//        //Fixing id size from number of bits
-//        sizeOfId = ((int)Math.pow(2, numberOfBitsInId))-1;
-//
-//        generateID();
-//        generateBSATags();
-//
-//        bsareader = new BSAReader(tags, numberOfBitsInId);
-//        bsareader.identifyTags();
-//        System.out.println("Avg Queries: " + bsareader.getQueryAverage());
-//        System.out.println("Avg Bits: " + bsareader.getBitAverage());
+        generatedUniqueIds = new TreeSet<Integer>();
+        tags = new BSATag[numberOfTags];
+
+        //Fixing id size from number of bits
+        sizeOfId = ((int)Math.pow(2, numberOfBitsInId))-1;
+
+        generateID();
+        generateBSATags();
+
+        bsareader = new BSAReader(tags, numberOfBitsInId);
+        bsareader.identifyTags();
+        System.out.println("Avg Queries: " + bsareader.getQueryAverage());
+        System.out.println("Avg Bits: " + bsareader.getBitAverage());
 
 
-
+        /*
         numberOfTags = 4;
         tags = new BSATag[numberOfTags];
         numberOfBitsInId = 8;
@@ -43,8 +44,8 @@ public class BenchEnvironment{
         for(int i = 0; i < tags.length; i++){
             System.out.println("Tag " + i + ": " + tags[i]);
         }
-        bsareader = new BSAReader(tags, numberOfBitsInId);
-        bsareader.identifyTags();
+        dbsareader = new DBSAReader(tags, numberOfBitsInId);
+        dbsareader.identifyTags();*/
 
 
     }
