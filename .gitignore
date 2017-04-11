@@ -1,6 +1,9 @@
 # Compiled class file
 *.class
 
+#tempfiles
+*.swp
+
 # Log file
 *.log
 bench.txt
