@@ -11,6 +11,8 @@ public class BenchEnvironment{
     BSATag[] tags;
     BSAReader bsareader;
     DBSAReader dbsareader;
+    BackTrackReader backtrackreader;
+    JumpAndDynamicReader jndreader;
 
     public static void main(String[] args){
         new BenchEnvironment();
@@ -27,26 +29,30 @@ public class BenchEnvironment{
         generateID();
         generateBSATags();
 
-        bsareader = new BSAReader(tags, numberOfBitsInId);
-        bsareader.identifyTags();
-        System.out.println("Avg Queries: " + bsareader.getQueryAverage());
-        System.out.println("Avg Bits: " + bsareader.getBitAverage());
+        //bsareader = new BSAReader(tags, numberOfBitsInId);
+        //bsareader.identifyTags();
+        backtrackreader = new BackTrackReader(tags, numberOfBitsInId);
+        backtrackreader.identifyTags();
+        System.out.println("Avg Queries: " + backtrackreader.getQueryAverage());
+        System.out.println("Avg Bits: " + backtrackreader.getBitAverage());
 
 
-        /*
-        numberOfTags = 4;
-        tags = new BSATag[numberOfTags];
-        numberOfBitsInId = 8;
-        tags[0] = new BSATag(numberOfBitsInId,0b10100111);
-        tags[1] = new BSATag(numberOfBitsInId,0b10110101);
-        tags[2] = new BSATag(numberOfBitsInId,0b10101111);
-        tags[3] = new BSATag(numberOfBitsInId,0b10111101);
-        for(int i = 0; i < tags.length; i++){
-            System.out.println("Tag " + i + ": " + tags[i]);
-        }
-        dbsareader = new DBSAReader(tags, numberOfBitsInId);
-        dbsareader.identifyTags();*/
-
+//        numberOfTags = 4;
+//        tags = new BSATag[numberOfTags];
+//        numberOfBitsInId = 8;
+//        tags[0] = new BSATag(numberOfBitsInId,0b10100111);
+//        tags[1] = new BSATag(numberOfBitsInId,0b10110101);
+//        tags[2] = new BSATag(numberOfBitsInId,0b10101111);
+//        tags[3] = new BSATag(numberOfBitsInId,0b10111101);
+//        for(int i = 0; i < tags.length; i++){
+//            System.out.println("Tag " + i + ": " + tags[i]);
+//        }
+//        //jndreader = new JumpAndDynamicReader(tags, numberOfBitsInId);
+//        //jndreader.identifyTags();
+//        //dbsareader = new DBSAReader(tags, numberOfBitsInId);
+//        //dbsareader.identifyTags();
+//        backtrackreader = new BackTrackReader(tags, numberOfBitsInId);
+//        backtrackreader.identifyTags();
 
     }
 
