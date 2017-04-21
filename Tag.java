@@ -1,10 +1,10 @@
 
 /* A tag that responds to queries from the reader */
-public class BSATag{
+public class Tag{
     private boolean active = true;
     char[] id;
 
-    public BSATag(int size, long idNumber){
+    public Tag(int size, long idNumber){
         createId(size,idNumber);
     }
 
@@ -26,7 +26,7 @@ public class BSATag{
         }
     }
 
-    /* Responds a dynamic bsa call which is only the part of the id 
+    /* Responds a dynamic bsa call which is only the part of the id
     * which is the part of the id that complements the query if the
     * query would make up the top bits in the id.
     * Example: query(101) id([101]001) -> reponse(001)*/
@@ -58,7 +58,7 @@ public class BSATag{
             return null;
         }
         if(query.length != id.length){
-            System.err.println("Size of BSAtag: " + id.length + " does not match " + query.length);
+            System.err.println("Size of tag: " + id.length + " does not match " + query.length);
             return null;
         }
         int size = id.length;

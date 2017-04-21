@@ -1,35 +1,20 @@
 import java.util.*;
 
 /* A reader using the jumpback algorithm to identify tags*/
-public class BackTrackReader implements Reader{
-    BSATag[] tags;
-    int idLength;
+public class BackTrackReader extends Reader{
 
-    TreeSet<Integer> currentCollisionBits;     //All bitindexes that differ from query
-    TreeSet<Integer> currentNonCollisionBits;  //Used to check if more bits collide
     TreeSet<Integer> backTrackBits;            //Bit indexes where branches start
 
-    //Algorithm helping variables
-    char[] responseToCompare;
-    int tagsFound = 0;
-    BSATag lastRespondingTag;
-
-    //Result helping variables
-    long currentNumberOfBits = 0;
-    long currentNumberOfQueries = 0;
-
-    // RESULTING DATA
-    double averageNumberOfQueries = 0;
-    double averageNumberOfBits = 0;
-
-    public BackTrackReader(BSATag[] tags, int numberOfBitsInId){
+    public BackTrackReader(Tag[] tags, int numberOfBitsInId){
         this.tags = tags;
         idLength = numberOfBitsInId;
         responseToCompare = new char[idLength];
         backTrackBits = new TreeSet<Integer>();
     }
 
-    /* Uses algorithm to identify all tags */
+    /* Using the backtrack method by not return to the very first query
+    * that contains only ones. It instead jumps back to collision bits
+    * where it still has not checked with all values. */
     public void identifyTags(){
         char[] query = new char[idLength];
         resetCollisionBits();
@@ -47,10 +32,10 @@ public class BackTrackReader implements Reader{
         calculateResults();
     }
 
-    /* Returns a new query using backtracking to jump back to 
+    /* Returns a new query using backtracking to jump back to
     * a branch in the search tree which has not been exhausted.
-    * This is done by keeping track of the bit position of where the 
-    * branches start and changing the bit where the branch started. 
+    * This is done by keeping track of the bit position of where the
+    * branches start and changing the bit where the branch started.
     * Branches start with a 0, so 1 is placed at the branch start in order
     * to exhaust the other branch. Algorithm correctness is guaranteed by
     * also changing the rest of the branch bits to 1 for all tags to respond.
@@ -69,23 +54,7 @@ public class BackTrackReader implements Reader{
 
     }
 
-    /* Average number of queries sent to identify one tag */
-    public double getQueryAverage(){
-        return averageNumberOfQueries;
-    }
 
-    /* Average number of bits required to identify one tag */
-    public double getBitAverage(){
-        return averageNumberOfBits;
-    }
-
-    /* Calculating the average result*/
-    private void calculateResults(){
-        System.out.println("Total Queries: " + currentNumberOfQueries);
-        System.out.println("Total Bits: " + currentNumberOfBits);
-        averageNumberOfBits = currentNumberOfBits / ((double)tags.length);
-        averageNumberOfQueries = currentNumberOfQueries / ((double)tags.length);
-    }
 
     /* Uses a previous query and biggest collision bit to find new query */
     /* Fills the next query with the same bits as previous query up until
@@ -109,46 +78,10 @@ public class BackTrackReader implements Reader{
         return query;
     }
 
-    /* Resets or initiates collision bit sets*/
-    private void resetCollisionBits(){
-        currentCollisionBits = new TreeSet<Integer>();
-        currentNonCollisionBits = new TreeSet<Integer>();
-        for(int i = 0; i < idLength; i++){
-            currentNonCollisionBits.add(i);
-        }
-    }
-
-    /* Sends the query to the cloud of tags */
-    public int sendQuery(char[] query){
-        currentNumberOfBits += query.length;
-        currentNumberOfQueries++;      //One query has succesfully been sent
-        System.out.println("Q " + currentNumberOfQueries + ": \t" + String.valueOf(query));
-
-        boolean firstResponse = true;
-        int numberOfReturns = 0;
-        char[] response;
-        for(int i = 0; i < tags.length; i++){
-            response = tags[i].respondBSAQuery(query);
-            if(response != null){       //null if no response
-                System.out.println(">\t" + String.valueOf(response));
-                //System.out.println("RESPONSE: " + tags[i]);
-                lastRespondingTag = tags[i];
-                if(firstResponse){       //First response used to compare
-                    responseToCompare = response;
-                    firstResponse = false;
-                }else{
-                    //The rest used to ACTIVE TAGSfind collision
-                    checkCollisionBits(response);
-                }
-                numberOfReturns++;
-                currentNumberOfBits += response.length;    //The bits returned
-            }
-        }
-        //System.out.println("COLLBITS: " + currentCollisionBits);
-        //System.out.println("QUERY: " + String.valueOf(query));
-
-
-        return numberOfReturns;
+    /* Returns the appropriate response from the tag depending
+    * on which algorith is used */
+    public char[] getResponseFromTag(Tag tag, char[] query){
+        return tag.respondBSAQuery(query);
     }
 
     /* Check from the current non collision bits which might collide */
@@ -157,7 +90,7 @@ public class BackTrackReader implements Reader{
     if two bits at one position index differs between two responses, then one of them also
     differs from the response we compare with.
     */
-    private void checkCollisionBits(char[] response){
+    public void checkCollisionBits(char[] response){
         Iterator<Integer> it = currentNonCollisionBits.iterator();
         while(it.hasNext()){
             int i = it.next();
@@ -168,14 +101,4 @@ public class BackTrackReader implements Reader{
         }
     }
 
-    private void printActiveTags(){
-        System.out.println("_______ACTIVE TAGS___________");
-        for(int i = 0; i < tags.length; i++){
-            if(tags[i].isActive()){
-                System.out.println(tags[i]);
-            }
-        }
-        System.out.println("______________________________");
-
-    }
 }

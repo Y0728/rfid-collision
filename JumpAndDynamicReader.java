@@ -1,35 +1,22 @@
 import java.util.*;
 
-/* A reader */
-public class JumpAndDynamicReader implements Reader{
-    BSATag[] tags;
-    int idLength;
+/* A reader using the Jump and Dynamic algorithm */
+public class JumpAndDynamicReader extends Reader{
 
-    TreeSet<Integer> currentCollisionBits;     //All bitindexes that differ from query
-    TreeSet<Integer> currentNonCollisionBits;  //Used to check if more bits collide
     TreeSet<Integer> backTrackBits;
 
-    //Algorithm helping variables
-    char[] responseToCompare;
-    int tagsFound = 0;
-    BSATag lastRespondingTag;
-
-    //Result helping variables
-    long currentNumberOfBits = 0;
-    long currentNumberOfQueries = 0;
-
-    // RESULTING DATA
-    double averageNumberOfQueries = 0;
-    double averageNumberOfBits = 0;
-
-    public JumpAndDynamicReader(BSATag[] tags, int numberOfBitsInId){
+    public JumpAndDynamicReader(Tag[] tags, int numberOfBitsInId){
         this.tags = tags;
         idLength = numberOfBitsInId;
         responseToCompare = new char[idLength];
         backTrackBits = new TreeSet<Integer>();
     }
 
-    /* Uses algorithm to identify all tags */
+    /* Uses the Jump and Dynamic algorithm to identify all tags.
+    * Using the backtrack method by not return to the very first query
+    * that contains only ones. It instead jumps back to collision bits
+    * where it still has not checked with all values. It also uses the
+    * Dynamic BSA to not send whole queries and receive whole responses.*/
     public void identifyTags(){
         char[] query = new char[idLength];
         resetCollisionBits();
@@ -43,7 +30,24 @@ public class JumpAndDynamicReader implements Reader{
             lastRespondingTag.deactivate();
             tagsFound++;
         }
+    Tag[] tags;
+    int idLength;
 
+    TreeSet<Integer> currentCollisionBits;     //All bitindexes that differ from query
+    TreeSet<Integer> currentNonCollisionBits;  //Used to check if more bits collide
+
+    //Algorithm helping variables
+    char[] responseToCompare;
+    int tagsFound = 0;
+    Tag lastRespondingTag;
+
+    //Result helping variables
+    long currentNumberOfBits = 0;
+    long currentNumberOfQueries = 0;
+
+    // RESULTING DATA
+    double averageNumberOfQueries = 0;
+    double averageNumberOfBits = 0;
         calculateResults();
     }
 
@@ -64,23 +68,7 @@ public class JumpAndDynamicReader implements Reader{
         return newQuery;
     }
 
-    /* Average number of queries sent to identify one tag */
-    public double getQueryAverage(){
-        return averageNumberOfQueries;
-    }
 
-    /* Average number of bits required to identify one tag */
-    public double getBitAverage(){
-        return averageNumberOfBits;
-    }
-
-    /* Calculating the average result*/
-    private void calculateResults(){
-        System.out.println("Total Queries: " + currentNumberOfQueries);
-        System.out.println("Total Bits: " + currentNumberOfBits);
-        averageNumberOfBits = currentNumberOfBits / ((double)tags.length);
-        averageNumberOfQueries = currentNumberOfQueries / ((double)tags.length);
-    }
 
     /* Uses a previous query and biggest collision bit to find new query */
     /* Fills the next query with the same bits as previous query up until
@@ -93,7 +81,7 @@ public class JumpAndDynamicReader implements Reader{
         }
         char[] newQuery = new char[currentCollisionBits.first() + 1];
         for(int i = 0; i < newQuery.length-1; i++){ //up until the last index
-            if(responseToCompare.length == idLength){ 
+            if(responseToCompare.length == idLength){
                 //First query will return full length response
                 newQuery[i] = responseToCompare[i];
             }else if(i >= query.length){
@@ -103,54 +91,18 @@ public class JumpAndDynamicReader implements Reader{
                 //Start of query will the same as before
                 newQuery[i] = query[i];
             }
-        }        
+        }
         newQuery[newQuery.length-1] = '0';
         backTrackBits.add(newQuery.length - 1);
 
         return newQuery;
     }
 
-    /* Resets or initiates collision bit sets*/
-    private void resetCollisionBits(){
-        currentCollisionBits = new TreeSet<Integer>();
-        currentNonCollisionBits = new TreeSet<Integer>();
-        for(int i = 0; i < idLength; i++){
-            currentNonCollisionBits.add(i);
-        }
-    }
 
-    /* Sends the query to the cloud of tags */
-    public int sendQuery(char[] query){
-        currentNumberOfBits += query.length;
-        currentNumberOfQueries++;      //One query has succesfully been sent
-        System.out.println("Q " + currentNumberOfQueries + ": \t" + String.valueOf(query));
-
-        boolean firstResponse = true;
-        int numberOfReturns = 0;
-        char[] response;
-        for(int i = 0; i < tags.length; i++){
-            response = tags[i].respondDBSAQuery(query);
-            if(response != null){       //null if no response
-                System.out.println(">\t" + String.valueOf(response));
-                //System.out.println("RESPONSE: " + tags[i]);
-                lastRespondingTag = tags[i];
-                if(firstResponse){       
-                    //First response used to compare
-                    responseToCompare = response;
-                    firstResponse = false;
-                }else{
-                    //The rest used to ACTIVE TAGSfind collision
-                    checkCollisionBits(response);
-                }
-                numberOfReturns++;
-                currentNumberOfBits += response.length;    //The bits returned
-            }
-        }
-        //System.out.println("COLLBITS: " + currentCollisionBits);
-        //System.out.println("QUERY: " + String.valueOf(query));
-
-
-        return numberOfReturns;
+    /* Returns the appropriate response from the tag depending
+    * on which algorith is used */
+    public char[] getResponseFromTag(Tag tag, char[] query){
+        return tag.respondDBSAQuery(query);
     }
 
     /* Check from the current non collision bits which might collide */
@@ -159,24 +111,14 @@ public class JumpAndDynamicReader implements Reader{
     if two bits at one position index differs between two responses, then one of them also
     differs from the response we compare with.
     */
-    private void checkCollisionBits(char[] response){
+    public void checkCollisionBits(char[] response){
         int querySize = idLength-response.length;
         for(int i = 0; i < response.length; i++){
             if(responseToCompare[i] != response[i]){
                 currentCollisionBits.add(querySize+i);
                 currentNonCollisionBits.remove(querySize+i);
-            }           
-        }
-    }
-
-    private void printActiveTags(){
-        System.out.println("_______ACTIVE TAGS___________");
-        for(int i = 0; i < tags.length; i++){
-            if(tags[i].isActive()){
-                System.out.println(tags[i]);
             }
         }
-        System.out.println("______________________________");
-
     }
+
 }

@@ -1,33 +1,21 @@
 import java.util.*;
 
-/* A reader */
-public class ImprovedReader implements Reader{
-    BSATag[] tags;
-    int idLength;
+/* A reader using the algorithm presented by Benssalah, Djeddou and Khelladi with
+* preset loops */
+public class ImprovedReader extends Reader{
 
-    TreeSet<Integer> currentCollisionBits;     //All bitindexes that differ from query
-    TreeSet<Integer> currentNonCollisionBits;  //Used to check if more bits collide
 
-    //Algorithm helping variables
-    char[] responseToCompare;
-    int tagsFound = 0;
-    BSATag lastRespondingTag;
-
-    //Result helping variables
-    long currentNumberOfBits = 0;
-    long currentNumberOfQueries = 0;
-
-    // RESULTING DATA
-    double averageNumberOfQueries = 0;
-    double averageNumberOfBits = 0;
-
-    public ImprovedReader(BSATag[] tags, int numberOfBitsInId){
+    public ImprovedReader(Tag[] tags, int numberOfBitsInId){
         this.tags = tags;
         idLength = numberOfBitsInId;
         responseToCompare = new char[idLength];
     }
 
-    /* Uses algorithm to identify all tags */
+    /* Uses the algorithm with preset loops. When two or more collision bits
+    * occur in responses, the reader creates a for loop with all possible
+    * binary values in those to collision bits. This will hopefully reduce the
+    * amount of tags that responds and will therefore decrease the total bits
+    * flow. */
     public void identifyTags(){
         char[] query = new char[idLength];
         Arrays.fill(query,'1');         //Reset query
@@ -36,8 +24,8 @@ public class ImprovedReader implements Reader{
         calculateResults();
     }
 
-    /** Sends queries and handles the preset loops that defines the improved 
-     * anti collision algorithm. 
+    /** Sends queries and handles the preset loops that defines the improved
+     * anti collision algorithm.
      * Taking the two highest collision bits from a query and letting those
      * bits take values (0,0) (0,1) (1,0) (1,1), the lower bits after the second collision bit
      * sets as value 1 and then sending the query recursively and repeating the process
@@ -63,7 +51,7 @@ public class ImprovedReader implements Reader{
             query[collisionBit] = '0';
             sendQuery(query);
             lastRespondingTag.deactivate();
-            
+
             query[collisionBit] = '1';
             sendQuery(query);
             lastRespondingTag.deactivate();
@@ -84,27 +72,12 @@ public class ImprovedReader implements Reader{
                     }
                     queryRepeater(query);
                 }
-            }           
+            }
         }
     }
 
-    /* Average number of queries sent to identify one tag */
-    public double getQueryAverage(){
-        return averageNumberOfQueries;
-    }
 
-    /* Average number of bits required to identify one tag */
-    public double getBitAverage(){
-        return averageNumberOfBits;
-    }
 
-    /* Calculating the average result*/
-    private void calculateResults(){
-        System.out.println("Total Queries: " + currentNumberOfQueries);
-        System.out.println("Total Bits: " + currentNumberOfBits);
-        averageNumberOfBits = currentNumberOfBits / ((double)tags.length);
-        averageNumberOfQueries = currentNumberOfQueries / ((double)tags.length);
-    }
 
     /* Uses a previous query and biggest collision bit to find new query */
     /* Fills the next query with the same bits as previous query up until
@@ -127,46 +100,11 @@ public class ImprovedReader implements Reader{
         return query;
     }
 
-    /* Resets or initiates collision bit sets*/
-    private void resetCollisionBits(){
-        currentCollisionBits = new TreeSet<Integer>();
-        currentNonCollisionBits = new TreeSet<Integer>();
-        for(int i = 0; i < idLength; i++){
-            currentNonCollisionBits.add(i);
-        }
-    }
 
-    /* Sends the query to the cloud of tags */
-    public int sendQuery(char[] query){
-        currentNumberOfBits += query.length;
-        currentNumberOfQueries++;      //One query has succesfully been sent
-        System.out.println("Q " + currentNumberOfQueries + ": \t" + String.valueOf(query));
-
-        boolean firstResponse = true;
-        int numberOfReturns = 0;
-        char[] response;
-        for(int i = 0; i < tags.length; i++){
-            response = tags[i].respondBSAQuery(query);
-            if(response != null){       //null if no response
-                System.out.println(">\t" + String.valueOf(response));
-                //System.out.println("RESPONSE: " + tags[i]);
-                lastRespondingTag = tags[i];
-                if(firstResponse){       //First response used to compare
-                    responseToCompare = response;
-                    firstResponse = false;
-                }else{
-                    //The rest used to ACTIVE TAGSfind collision
-                    checkCollisionBits(response);
-                }
-                numberOfReturns++;
-                currentNumberOfBits += response.length;    //The bits returned
-            }
-        }
-        //System.out.println("COLLBITS: " + currentCollisionBits);
-        //System.out.println("QUERY: " + String.valueOf(query));
-
-
-        return numberOfReturns;
+    /* Returns the appropriate response from the tag depending
+    * on which algorith is used */
+    public char[] getResponseFromTag(Tag tag, char[] query){
+        return tag.respondBSAQuery(query);
     }
 
     /* Check from the current non collision bits which might collide */
@@ -175,7 +113,7 @@ public class ImprovedReader implements Reader{
     if two bits at one position index differs between two responses, then one of them also
     differs from the response we compare with.
     */
-    private void checkCollisionBits(char[] response){
+    public void checkCollisionBits(char[] response){
         Iterator<Integer> it = currentNonCollisionBits.iterator();
         while(it.hasNext()){
             int i = it.next();
@@ -186,14 +124,4 @@ public class ImprovedReader implements Reader{
         }
     }
 
-    private void printActiveTags(){
-        System.out.println("_______ACTIVE TAGS___________");
-        for(int i = 0; i < tags.length; i++){
-            if(tags[i].isActive()){
-                System.out.println(tags[i]);
-            }
-        }
-        System.out.println("______________________________");
-
-    }
 }
