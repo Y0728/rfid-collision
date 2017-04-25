@@ -1,0 +1,547 @@
+___________________________________________
+Test with 50 tags with 6 bits in ID
+Binary Search Algorithm: 
+Total number of queries: 		192
+Total number of bits: 			12858
+Average number of queries 		3.84
+Average number of bits: 		257.16
+
+Dynamic Binary Search Algorithm: 
+Total number of queries: 		192
+Total number of bits: 			11176
+Average number of queries 		3.84
+Average number of bits: 		223.52
+
+Backtracking Algorithm: 
+Total number of queries: 		99
+Total number of bits: 			2610
+Average number of queries 		1.98
+Average number of bits: 		52.2
+
+Jump and Dynamic Algorithm: 
+Total number of queries: 		99
+Total number of bits: 			1746
+Average number of queries 		1.98
+Average number of bits: 		34.92
+
+Improved Algorithm: 
+Total number of queries: 		83
+Total number of bits: 			1698
+Average number of queries 		1.66
+Average number of bits: 		33.96
+
+___________________________________________
+Test with 50 tags with 16 bits in ID
+Binary Search Algorithm: 
+Total number of queries: 		195
+Total number of bits: 			35456
+Average number of queries 		3.9
+Average number of bits: 		709.12
+
+Dynamic Binary Search Algorithm: 
+Total number of queries: 		195
+Total number of bits: 			32108
+Average number of queries 		3.9
+Average number of bits: 		642.16
+
+Backtracking Algorithm: 
+Total number of queries: 		99
+Total number of bits: 			7088
+Average number of queries 		1.98
+Average number of bits: 		141.76
+
+Jump and Dynamic Algorithm: 
+Total number of queries: 		99
+Total number of bits: 			4966
+Average number of queries 		1.98
+Average number of bits: 		99.32
+
+Improved Algorithm: 
+Total number of queries: 		121
+Total number of bits: 			5504
+Average number of queries 		2.42
+Average number of bits: 		110.08
+
+___________________________________________
+Test with 200 tags with 8 bits in ID
+Binary Search Algorithm: 
+Total number of queries: 		958
+Total number of bits: 			248152
+Average number of queries 		4.79
+Average number of bits: 		1240.76
+
+Dynamic Binary Search Algorithm: 
+Total number of queries: 		958
+Total number of bits: 			225461
+Average number of queries 		4.79
+Average number of bits: 		1127.305
+
+Backtracking Algorithm: 
+Total number of queries: 		399
+Total number of bits: 			17144
+Average number of queries 		1.995
+Average number of bits: 		85.72
+
+Jump and Dynamic Algorithm: 
+Total number of queries: 		399
+Total number of bits: 			11098
+Average number of queries 		1.995
+Average number of bits: 		55.49
+
+Improved Algorithm: 
+Total number of queries: 		331
+Total number of bits: 			10672
+Average number of queries 		1.655
+Average number of bits: 		53.36
+
+___________________________________________
+Test with 200 tags with 10 bits in ID
+Binary Search Algorithm: 
+Total number of queries: 		1013
+Total number of bits: 			326510
+Average number of queries 		5.065
+Average number of bits: 		1632.55
+
+Dynamic Binary Search Algorithm: 
+Total number of queries: 		1013
+Total number of bits: 			297858
+Average number of queries 		5.065
+Average number of bits: 		1489.29
+
+Backtracking Algorithm: 
+Total number of queries: 		399
+Total number of bits: 			21810
+Average number of queries 		1.995
+Average number of bits: 		109.05
+
+Jump and Dynamic Algorithm: 
+Total number of queries: 		399
+Total number of bits: 			13836
+Average number of queries 		1.995
+Average number of bits: 		69.18
+
+Improved Algorithm: 
+Total number of queries: 		393
+Total number of bits: 			14650
+Average number of queries 		1.965
+Average number of bits: 		73.25
+
+___________________________________________
+Test with 1000 tags with 16 bits in ID
+Binary Search Algorithm: 
+Total number of queries: 		6186
+Total number of bits: 			12342368
+Average number of queries 		6.186
+Average number of bits: 		12342.368
+
+Dynamic Binary Search Algorithm: 
+Total number of queries: 		6186
+Total number of bits: 			11746338
+Average number of queries 		6.186
+Average number of bits: 		11746.338
+
+Backtracking Algorithm: 
+Total number of queries: 		1999
+Total number of bits: 			212784
+Average number of queries 		1.999
+Average number of bits: 		212.784
+
+Jump and Dynamic Algorithm: 
+Total number of queries: 		1999
+Total number of bits: 			140996
+Average number of queries 		1.999
+Average number of bits: 		140.996
+
+Improved Algorithm: 
+Total number of queries: 		2257
+Total number of bits: 			142176
+Average number of queries 		2.257
+Average number of bits: 		142.176
+
+___________________________________________
+Test with 1000 tags with 32 bits in ID
+Binary Search Algorithm: 
+Total number of queries: 		6176
+Total number of bits: 			24379360
+Average number of queries 		6.176
+Average number of bits: 		24379.36
+
+Dynamic Binary Search Algorithm: 
+Total number of queries: 		6176
+Total number of bits: 			23467339
+Average number of queries 		6.176
+Average number of bits: 		23467.339
+
+Backtracking Algorithm: 
+Total number of queries: 		1999
+Total number of bits: 			424768
+Average number of queries 		1.999
+Average number of bits: 		424.768
+
+Jump and Dynamic Algorithm: 
+Total number of queries: 		1999
+Total number of bits: 			312636
+Average number of queries 		1.999
+Average number of bits: 		312.636
+
+Improved Algorithm: 
+Total number of queries: 		2321
+Total number of bits: 			284512
+Average number of queries 		2.321
+Average number of bits: 		284.512
+
+___________________________________________
+Test with 5000 tags with 16 bits in ID
+Binary Search Algorithm: 
+Total number of queries: 		36421
+Total number of bits: 			298738144
+Average number of queries 		7.2842
+Average number of bits: 		59747.6288
+
+Dynamic Binary Search Algorithm: 
+Total number of queries: 		36421
+Total number of bits: 			285932248
+Average number of queries 		7.2842
+Average number of bits: 		57186.4496
+
+Backtracking Algorithm: 
+Total number of queries: 		9999
+Total number of bits: 			1247728
+Average number of queries 		1.9998
+Average number of bits: 		249.5456
+
+Jump and Dynamic Algorithm: 
+Total number of queries: 		9999
+Total number of bits: 			779685
+Average number of queries 		1.9998
+Average number of bits: 		155.937
+
+Improved Algorithm: 
+Total number of queries: 		10519
+Total number of bits: 			787648
+Average number of queries 		2.1038
+Average number of bits: 		157.5296
+
+___________________________________________
+Test with 5000 tags with 32 bits in ID
+Binary Search Algorithm: 
+Total number of queries: 		36684
+Total number of bits: 			606486112
+Average number of queries 		7.3368
+Average number of bits: 		121297.2224
+
+Dynamic Binary Search Algorithm: 
+Total number of queries: 		36684
+Total number of bits: 			586368259
+Average number of queries 		7.3368
+Average number of bits: 		117273.6518
+
+Backtracking Algorithm: 
+Total number of queries: 		9999
+Total number of bits: 			2498464
+Average number of queries 		1.9998
+Average number of bits: 		499.6928
+
+Jump and Dynamic Algorithm: 
+Total number of queries: 		9999
+Total number of bits: 			1809154
+Average number of queries 		1.9998
+Average number of bits: 		361.8308
+
+Improved Algorithm: 
+Total number of queries: 		11681
+Total number of bits: 			1615104
+Average number of queries 		2.3362
+Average number of bits: 		323.0208
+
+___________________________________________
+Test with 10000 tags with 16 bits in ID
+Binary Search Algorithm: 
+Total number of queries: 		77851
+Total number of bits: 			1200363344
+Average number of queries 		7.7851
+Average number of bits: 		120036.3344
+
+Dynamic Binary Search Algorithm: 
+Total number of queries: 		77851
+Total number of bits: 			1149623232
+Average number of queries 		7.7851
+Average number of bits: 		114962.3232
+
+Backtracking Algorithm: 
+Total number of queries: 		19999
+Total number of bits: 			2651760
+Average number of queries 		1.9999
+Average number of bits: 		265.176
+
+Jump and Dynamic Algorithm: 
+Total number of queries: 		19999
+Total number of bits: 			1612110
+Average number of queries 		1.9999
+Average number of bits: 		161.211
+
+Improved Algorithm: 
+Total number of queries: 		20155
+Total number of bits: 			1635648
+Average number of queries 		2.0155
+Average number of bits: 		163.5648
+
+___________________________________________
+Test with 10000 tags with 32 bits in ID
+Binary Search Algorithm: 
+Total number of queries: 		78090
+Total number of bits: 			2388141344
+Average number of queries 		7.809
+Average number of bits: 		238814.1344
+
+Dynamic Binary Search Algorithm: 
+Total number of queries: 		78090
+Total number of bits: 			2312348277
+Average number of queries 		7.809
+Average number of bits: 		231234.8277
+
+Backtracking Algorithm: 
+Total number of queries: 		19999
+Total number of bits: 			5318240
+Average number of queries 		1.9999
+Average number of bits: 		531.824
+
+Jump and Dynamic Algorithm: 
+Total number of queries: 		19999
+Total number of bits: 			3812490
+Average number of queries 		1.9999
+Average number of bits: 		381.249
+
+Improved Algorithm: 
+Total number of queries: 		23193
+Total number of bits: 			3383808
+Average number of queries 		2.3193
+Average number of bits: 		338.3808
+
+___________________________________________
+Test with 20000 tags with 16 bits in ID
+Binary Search Algorithm: 
+Total number of queries: 		164763
+Total number of bits: 			4799638704
+Average number of queries 		8.23815
+Average number of bits: 		239981.9352
+
+Dynamic Binary Search Algorithm: 
+Total number of queries: 		164763
+Total number of bits: 			4598706826
+Average number of queries 		8.23815
+Average number of bits: 		229935.3413
+
+Backtracking Algorithm: 
+Total number of queries: 		39999
+Total number of bits: 			5609680
+Average number of queries 		1.99995
+Average number of bits: 		280.484
+
+Jump and Dynamic Algorithm: 
+Total number of queries: 		39999
+Total number of bits: 			3344291
+Average number of queries 		1.99995
+Average number of bits: 		167.21455
+
+Improved Algorithm: 
+Total number of queries: 		37887
+Total number of bits: 			3376976
+Average number of queries 		1.89435
+Average number of bits: 		168.8488
+
+___________________________________________
+Test with 20000 tags with 32 bits in ID
+Binary Search Algorithm: 
+Total number of queries: 		166219
+Total number of bits: 			9655689856
+Average number of queries 		8.31095
+Average number of bits: 		482784.4928
+
+Dynamic Binary Search Algorithm: 
+Total number of queries: 		166219
+Total number of bits: 			9347666563
+Average number of queries 		8.31095
+Average number of bits: 		467383.32815
+
+Backtracking Algorithm: 
+Total number of queries: 		39999
+Total number of bits: 			11276000
+Average number of queries 		1.99995
+Average number of bits: 		563.8
+
+Jump and Dynamic Algorithm: 
+Total number of queries: 		39999
+Total number of bits: 			7992527
+Average number of queries 		1.99995
+Average number of bits: 		399.62635
+
+Improved Algorithm: 
+Total number of queries: 		46279
+Total number of bits: 			7077920
+Average number of queries 		2.31395
+Average number of bits: 		353.896
+
+___________________________________________
+Test with 40000 tags with 16 bits in ID
+Binary Search Algorithm: 
+Total number of queries: 		348896
+Total number of bits: 			19184094720
+Average number of queries 		8.7224
+Average number of bits: 		479602.368
+
+Dynamic Binary Search Algorithm: 
+Total number of queries: 		348896
+Total number of bits: 			18380694909
+Average number of queries 		8.7224
+Average number of bits: 		459517.372725
+
+Backtracking Algorithm: 
+Total number of queries: 		79999
+Total number of bits: 			11798512
+Average number of queries 		1.999975
+Average number of bits: 		294.9628
+
+Jump and Dynamic Algorithm: 
+Total number of queries: 		79999
+Total number of bits: 			6980379
+Average number of queries 		1.999975
+Average number of bits: 		174.509475
+
+Improved Algorithm: 
+Total number of queries: 		69069
+Total number of bits: 			6840832
+Average number of queries 		1.726725
+Average number of bits: 		171.0208
+
+___________________________________________
+Test with 40000 tags with 32 bits in ID
+Binary Search Algorithm: 
+Total number of queries: 		352720
+Total number of bits: 			38485963456
+Average number of queries 		8.818
+Average number of bits: 		962149.0864
+
+Dynamic Binary Search Algorithm: 
+Total number of queries: 		352720
+Total number of bits: 			37271705619
+Average number of queries 		8.818
+Average number of bits: 		931792.640475
+
+Backtracking Algorithm: 
+Total number of queries: 		79999
+Total number of bits: 			23829568
+Average number of queries 		1.999975
+Average number of bits: 		595.7392
+
+Jump and Dynamic Algorithm: 
+Total number of queries: 		79999
+Total number of bits: 			16679230
+Average number of queries 		1.999975
+Average number of bits: 		416.98075
+
+Improved Algorithm: 
+Total number of queries: 		92611
+Total number of bits: 			14799264
+Average number of queries 		2.315275
+Average number of bits: 		369.9816
+
+___________________________________________
+Test with 60000 tags with 16 bits in ID
+Binary Search Algorithm: 
+Total number of queries: 		537266
+Total number of bits: 			43201124704
+Average number of queries 		8.954433333333334
+Average number of bits: 		720018.7450666666
+
+Dynamic Binary Search Algorithm: 
+Total number of queries: 		537266
+Total number of bits: 			41397095994
+Average number of queries 		8.954433333333334
+Average number of bits: 		689951.5999
+
+Backtracking Algorithm: 
+Total number of queries: 		119999
+Total number of bits: 			18151968
+Average number of queries 		1.9999833333333332
+Average number of bits: 		302.5328
+
+Jump and Dynamic Algorithm: 
+Total number of queries: 		119999
+Total number of bits: 			10827220
+Average number of queries 		1.9999833333333332
+Average number of bits: 		180.45366666666666
+
+Improved Algorithm: 
+Total number of queries: 		86495
+Total number of bits: 			10024832
+Average number of queries 		1.4415833333333334
+Average number of bits: 		167.08053333333334
+
+___________________________________________
+Test with 60000 tags with 32 bits in ID
+Binary Search Algorithm: 
+Total number of queries: 		545155
+Total number of bits: 			86316624032
+Average number of queries 		9.085916666666666
+Average number of bits: 		1438610.4005333334
+
+Dynamic Binary Search Algorithm: 
+Total number of queries: 		545155
+Total number of bits: 			83612431948
+Average number of queries 		9.085916666666666
+Average number of bits: 		1393540.5324666668
+
+Backtracking Algorithm: 
+Total number of queries: 		119999
+Total number of bits: 			36868992
+Average number of queries 		1.9999833333333332
+Average number of bits: 		614.4832
+
+Jump and Dynamic Algorithm: 
+Total number of queries: 		119999
+Total number of bits: 			25601314
+Average number of queries 		1.9999833333333332
+Average number of bits: 		426.68856666666665
+
+Improved Algorithm: 
+Total number of queries: 		139235
+Total number of bits: 			22777984
+Average number of queries 		2.3205833333333334
+Average number of bits: 		379.63306666666665
+
+___________________________________________
+Test with 80000 tags with 32 bits in ID
+Binary Search Algorithm: 
+Total number of queries: 		745988
+Total number of bits: 			153759451360
+Average number of queries 		9.32485
+Average number of bits: 		1921993.142
+
+Dynamic Binary Search Algorithm: 
+Total number of queries: 		745988
+Total number of bits: 			148927516556
+Average number of queries 		9.32485
+Average number of bits: 		1861593.95695
+
+Backtracking Algorithm: 
+Total number of queries: 		159999
+Total number of bits: 			50237984
+Average number of queries 		1.9999875
+Average number of bits: 		627.9748
+
+Jump and Dynamic Algorithm: 
+Total number of queries: 		159999
+Total number of bits: 			34676530
+Average number of queries 		1.9999875
+Average number of bits: 		433.456625
+
+Improved Algorithm: 
+Total number of queries: 		185629
+Total number of bits: 			30918336
+Average number of queries 		2.3203625
+Average number of bits: 		386.4792
+
+___________________________________________
+Test with 100000 tags with 32 bits in ID
+Binary Search Algorithm: 

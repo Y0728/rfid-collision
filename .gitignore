@@ -6,7 +6,6 @@
 
 # Log file
 *.log
-bench.txt
 
 # BlueJ files
 *.ctxt
