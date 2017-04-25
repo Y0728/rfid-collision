@@ -21,7 +21,6 @@ public class ImprovedReader extends Reader{
         Arrays.fill(query,'1');         //Reset query
         queryRepeater(query);
 
-        calculateResults();
     }
 
     /** Sends queries and handles the preset loops that defines the improved

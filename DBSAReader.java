@@ -29,8 +29,6 @@ public class DBSAReader extends Reader{
             lastRespondingTag.deactivate();
             tagsFound++;
         }
-
-        calculateResults();
     }
 
 

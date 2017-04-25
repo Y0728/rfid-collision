@@ -27,8 +27,6 @@ public class BSAReader extends Reader{
             lastRespondingTag.deactivate();
             tagsFound++;
         }
-
-        calculateResults();
     }
 
 

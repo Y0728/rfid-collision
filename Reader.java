@@ -32,12 +32,15 @@ public abstract class Reader{
         return averageNumberOfBits;
     }
 
+
     /* Calculating the average result*/
     protected void calculateResults(){
-        System.out.println("Total Queries: " + currentNumberOfQueries);
-        System.out.println("Total Bits: " + currentNumberOfBits);
+        System.out.println("Total number of queries: \t\t" + currentNumberOfQueries);
+        System.out.println("Total number of bits: \t\t\t" + currentNumberOfBits);
         averageNumberOfBits = currentNumberOfBits / ((double)tags.length);
         averageNumberOfQueries = currentNumberOfQueries / ((double)tags.length);
+        System.out.println("Average number of queries \t\t" + averageNumberOfQueries);
+        System.out.println("Average number of bits: \t\t" + averageNumberOfBits);
     }
 
 

@@ -30,25 +30,6 @@ public class JumpAndDynamicReader extends Reader{
             lastRespondingTag.deactivate();
             tagsFound++;
         }
-    Tag[] tags;
-    int idLength;
-
-    TreeSet<Integer> currentCollisionBits;     //All bitindexes that differ from query
-    TreeSet<Integer> currentNonCollisionBits;  //Used to check if more bits collide
-
-    //Algorithm helping variables
-    char[] responseToCompare;
-    int tagsFound = 0;
-    Tag lastRespondingTag;
-
-    //Result helping variables
-    long currentNumberOfBits = 0;
-    long currentNumberOfQueries = 0;
-
-    // RESULTING DATA
-    double averageNumberOfQueries = 0;
-    double averageNumberOfBits = 0;
-        calculateResults();
     }
 
     /*

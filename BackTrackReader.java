@@ -28,8 +28,6 @@ public class BackTrackReader extends Reader{
             lastRespondingTag.deactivate();
             tagsFound++;
         }
-
-        calculateResults();
     }
 
     /* Returns a new query using backtracking to jump back to
